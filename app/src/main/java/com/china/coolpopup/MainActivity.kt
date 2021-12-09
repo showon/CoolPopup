@@ -1,5 +1,6 @@
 package com.china.coolpopup
 
+import android.app.AlertDialog
 import android.app.Notification
 import android.app.PendingIntent
 import android.app.UiModeManager
@@ -21,6 +22,8 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.RemoteInput
 import com.blankj.utilcode.util.LogUtils
+import com.lzf.easyfloat.interfaces.OnPermissionResult
+import com.lzf.easyfloat.permission.PermissionUtils
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
@@ -36,19 +39,16 @@ class MainActivity : AppCompatActivity() {
         if (!isNotificationListenersEnabled()) {
             gotoNotificationAccessSetting()
         }
+
+        // 在后台开启驾驶模式；
+        mo23397(true);
     }
 
     fun openPermission(view: View) {
-        if (Build.VERSION.SDK_INT >= 23) {//6.0以上
-            try {
-                startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION));
-            } catch (e:Exception) {
-                e.printStackTrace();
-            }
-        }
+        checkPermission()
     }
 
-    fun mo23397(z: Boolean) {
+    private fun mo23397(z: Boolean) {
         // EXTENSIONS
         val uiManager = getSystemService(UI_MODE_SERVICE) as UiModeManager
         if (z) {
@@ -172,4 +172,26 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
+    /**
+     * 检测浮窗权限是否开启，若没有给与申请提示框（非必须，申请依旧是EasyFloat内部进行）
+     */
+    private fun checkPermission() {
+        if (PermissionUtils.checkPermission(this)) {
+
+        } else {
+            requestPermission()
+        }
+    }
+
+    /**
+     * 主动申请浮窗权限
+     */
+    private fun requestPermission() {
+        PermissionUtils.requestPermission(this, object : OnPermissionResult {
+            override fun permissionResult(isOpen: Boolean) {
+
+            }
+        })
+    }
 }
