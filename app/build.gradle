@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        // 因为开启Android auto需要这个包名，只检测包名不检测任何代码。。
+        // 所以需要安装一个这个包名的空壳app。本案例为了简单，把自己的包名设成了这个。。
+        // 如果用于其他app，需要自己做一个空壳app引导用户安装。
+
+        applicationId "com.google.android.projection.gearhead"
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation project(path: ':utilcode')
+//    implementation 'com.github.princekin-f:EasyFloat:1.3.4'
+}
