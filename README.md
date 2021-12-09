@@ -4,7 +4,12 @@
 1. 打开Android auto模式；
 1. 利用通知使用权限拿到Notification，调用post方法。
 
+工程中有两个library：
 
+- 悬浮窗是 https://github.com/princekin-f/EasyFloat/
+- utils包 https://github.com/Blankj/AndroidUtilCode/
+
+主要功能已经完成，弹窗的UI还没有，如果想任意页面都可进行消息回复，可以自行开发一个聊天UI，利用悬浮窗弹出。
 
 ### 第一步：如何用代码打开Android auto模式呢？又不能弹出提醒被用户感知到。
 
