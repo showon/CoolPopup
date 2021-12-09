@@ -27,7 +27,10 @@ fun open(b: Boolean) {
     }
 ```
 
-就是这么简单就可以无声无息打开Android auto模式；<br />但是有个前提，很多国产手机都阉割了，并没有安装Android Auto包。也不要紧，只要自己做一个空包安装就可以，开启自动驾驶模式只检测有无包名。
+就是这么简单就可以无声无息打开Android auto模式；
+
+但是有个前提，很多国产手机都阉割了，并没有安装Android Auto包。也不要紧，只要自己做一个空包安装就可以，开启驾驶模式只检测有无包名。
+
 
 > Android Auto的包名：applicationId "com.google.android.projection.gearhead"
 > 做一个空包，桌面没有图标。
@@ -112,7 +115,7 @@ class NotificationService : NotificationListenerService() {
         val key = remoteInput.resultKey
         val localIntent = Intent()
         val resultBundle = Bundle()
-        resultBundle.putString(key, "自动回复的内容[$]")
+        resultBundle.putString(key, "你给我发送了[${list3[list3.size - 1].trim()}]，我给你的备注是= $title")
         RemoteInput.addResultsToIntent(
             arrayOf(RemoteInput.Builder(key).build()),
             localIntent,
@@ -128,10 +131,13 @@ class NotificationService : NotificationListenerService() {
 ```
 
 这样就可以搞定了。。
-比如正在看小说的时候，弹出一个微信聊天窗口，输入消息发送出去。
-比如正在购物的时候，来消息了，弹出一个微信窗口，输入消息发送出去。
-只要你想象力够丰富，可以用在任意场景，如果在任意位置弹窗，需要再做一个悬浮窗。
-当前也可以设置一条自动回复消息，有人给你发消息，就自动回复：机主正在忙，上后回复……
+- 比如正在看小说的时候，弹出一个微信聊天窗口，输入消息发送出去。
+
+- 比如正在购物的时候，来消息了，弹出一个微信窗口，输入消息发送出去。
+
+只要你想象力够丰富，可以用在任意场景。
+- 如果在任意位置弹窗，需要再做一个悬浮窗。
+- 当前也可以设置一条自动回复消息，有人给你发消息，就自动回复：机主正在忙，上后回复……
 
 
 还可以做各种炫酷的通知样式，再也不需要为了这点小小的功能去花几十大洋了。。
